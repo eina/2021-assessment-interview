@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLiveQuery } from 'dexie-react-hooks';
 
@@ -22,6 +22,7 @@ const List = ({ data }) => {
 };
 
 const App = () => {
+  const [search, setSearch] = useState('');
   useEffect(() => {
     const getMovies = async () => {
       try {
@@ -45,6 +46,10 @@ const App = () => {
 
   // todo: add loader
   const moviesList = useLiveQuery(async () => db.movies.toArray());
+  const searchedList = useLiveQuery(
+    async () => db.movies.where('tags').startsWith(search).distinct().toArray(),
+    [search],
+  );
 
   return (
     <div className="App">
@@ -52,7 +57,22 @@ const App = () => {
         <h1>Movies</h1>
         <ClearDatabaseButton />
       </header>
-      <List data={moviesList || []} />
+      <label>
+        Search Tags
+        <input
+          type="search"
+          placeholder="Search Tags"
+          aria-label="Search through tags"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </label>
+
+      {search ? (
+        <List data={searchedList || []} />
+      ) : (
+        <List data={moviesList || []} />
+      )}
     </div>
   );
 };
