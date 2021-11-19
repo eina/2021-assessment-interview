@@ -21,30 +21,28 @@ const AddTagField = ({ movieId, tagLimit }) => {
   };
 
   return (
-    <>
-      <label>
-        Add tag
-        <input
-          type="text"
-          name={`tag-${movieId}`}
-          value={tags[movieId] || ''}
-          placeholder="Placeholder"
-          onChange={(e) =>
-            setTags({
-              ...tags,
-              [movieId]: e.target.value,
-            })
-          }
-          disabled={tagLimit}
-        />
-      </label>
+    <div>
+      <input
+        type="text"
+        name={`tag-${movieId}`}
+        value={tags[movieId] || ''}
+        placeholder="Placeholder"
+        onChange={(e) =>
+          setTags({
+            ...tags,
+            [movieId]: e.target.value,
+          })
+        }
+        disabled={tagLimit}
+        aria-label="Add tag"
+      />
       <button
         onClick={() => addTag(movieId, tags[movieId])}
         disabled={tagLimit}
       >
         Add Tag
       </button>
-    </>
+    </div>
   );
 };
 

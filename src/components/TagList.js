@@ -1,7 +1,15 @@
+/** @jsxImportSource @emotion/react */
 import PropTypes from 'prop-types';
-import { ReactComponent as RemoveIcon } from '../assets/x-icon.svg';
+import { css } from '@emotion/react';
 
 import { removeTag } from '../db';
+import { ReactComponent as RemoveIcon } from '../assets/x-icon.svg';
+
+const tagItem = css({
+  margin: '0 4px',
+  backgroundColor: '#4a6fa9',
+  color: '#fff',
+});
 
 const TagList = ({ tags, movieId }) => {
   if (!tags.length) {
@@ -9,9 +17,9 @@ const TagList = ({ tags, movieId }) => {
   }
 
   return (
-    <ul>
+    <ul css={{ listStyle: 'none', paddingLeft: 0, display: 'flex' }}>
       {tags.map((t, idx) => (
-        <li key={idx}>
+        <li key={idx} css={tagItem}>
           {t}
           <button onClick={() => removeTag(movieId, t)}>
             <RemoveIcon />

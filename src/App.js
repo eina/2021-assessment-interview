@@ -1,25 +1,11 @@
+/** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useLiveQuery } from 'dexie-react-hooks';
 
 import { db } from './db';
 import ClearDatabaseButton from './components/ClearDatabaseButton';
-import AddTagField from './components/AddTagField';
-import TagList from './components/TagList';
-
-const List = ({ data }) => {
-  return (
-    <ul>
-      {data?.map((item) => (
-        <li key={item.id}>
-          {item.name} &mdash; {item.created_at}
-          <TagList tags={item.tags} movieId={item.id} />
-          <AddTagField movieId={item.id} tagLimit={item.tags.length === 5} />
-        </li>
-      ))}
-    </ul>
-  );
-};
+import List from './components/List';
 
 const App = () => {
   const [search, setSearch] = useState('');
@@ -52,7 +38,7 @@ const App = () => {
   );
 
   return (
-    <div className="App">
+    <div css={{ fontFamily: 'sans-serif' }}>
       <header>
         <h1>Movies</h1>
         <ClearDatabaseButton />
@@ -67,12 +53,7 @@ const App = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </label>
-
-      {search ? (
-        <List data={searchedList || []} />
-      ) : (
-        <List data={moviesList || []} />
-      )}
+      <List data={search ? searchedList : moviesList} />
     </div>
   );
 };
