@@ -1,7 +1,30 @@
+/** @jsxImportSource @emotion/react */
 import { useState } from 'react';
 import PropTypes from 'prop-types';
+import { css } from '@emotion/react';
 
 import { db } from '../db';
+
+const inputField = css({
+  width: '100%',
+  padding: '1em',
+  marginRight: 10,
+  color: '#3c3e3d',
+});
+
+const addButton = css({
+  width: '30%',
+  padding: '1em',
+  border: 'none',
+  borderRadius: 5,
+  backgroundColor: '#2c6765',
+  fontWeight: 600,
+  color: '#fff',
+  cursor: 'pointer',
+  '&:hover, &:focus, &:active': {
+    backgroundColor: 'rgba(44, 103, 101, 0.9)',
+  },
+});
 
 const AddTagField = ({ movieId, tagLimit }) => {
   const [tags, setTags] = useState({});
@@ -21,7 +44,7 @@ const AddTagField = ({ movieId, tagLimit }) => {
   };
 
   return (
-    <div>
+    <div css={{ display: 'flex' }}>
       <input
         type="text"
         name={`tag-${movieId}`}
@@ -35,10 +58,12 @@ const AddTagField = ({ movieId, tagLimit }) => {
         }
         disabled={tagLimit}
         aria-label="Add tag"
+        css={inputField}
       />
       <button
         onClick={() => addTag(movieId, tags[movieId])}
         disabled={tagLimit}
+        css={addButton}
       >
         Add Tag
       </button>

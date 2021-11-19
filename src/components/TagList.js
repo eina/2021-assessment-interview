@@ -7,6 +7,7 @@ import { ReactComponent as RemoveIcon } from '../assets/x-icon.svg';
 
 const tagItem = css({
   display: 'flex',
+  // flex: '0 0 100%',
   margin: '0 4px',
   padding: '4px 12px 4px 10px',
   borderRadius: 25,

@@ -6,6 +6,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from './db';
 import ClearDatabaseButton from './components/ClearDatabaseButton';
 import List from './components/List';
+import SearchField from './components/SearchField';
 
 const App = () => {
   const [search, setSearch] = useState('');
@@ -30,7 +31,6 @@ const App = () => {
     getMovies();
   }, []);
 
-  // todo: add loader
   const moviesList = useLiveQuery(async () => db.movies.toArray());
   const searchedList = useLiveQuery(
     async () => db.movies.where('tags').startsWith(search).distinct().toArray(),
@@ -38,21 +38,28 @@ const App = () => {
   );
 
   return (
-    <div css={{ fontFamily: 'sans-serif' }}>
-      <header>
-        <h1>Movies</h1>
-        <ClearDatabaseButton />
-      </header>
-      <label>
-        Search Tags
-        <input
-          type="search"
-          placeholder="Search Tags"
-          aria-label="Search through tags"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+    <div
+      css={{
+        padding: '24px',
+        backgroundColor: '#F3F3F3',
+        minHeight: '100vh',
+      }}
+    >
+      <header
+        css={{
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr',
+        }}
+      >
+        <div>
+          <ClearDatabaseButton />
+        </div>
+        <SearchField
+          search={search}
+          handleSearch={(e) => setSearch(e.target.value)}
         />
-      </label>
+      </header>
+
       <List data={search ? searchedList : moviesList} />
     </div>
   );
