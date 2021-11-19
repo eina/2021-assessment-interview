@@ -6,8 +6,22 @@ import { removeTag } from '../db';
 import { ReactComponent as RemoveIcon } from '../assets/x-icon.svg';
 
 const tagItem = css({
+  display: 'flex',
   margin: '0 4px',
+  padding: '4px 12px 4px 10px',
+  borderRadius: 25,
   backgroundColor: '#4a6fa9',
+  color: '#fff',
+  fontWeight: 600,
+});
+
+const removeButton = css({
+  border: 'none',
+  background: 'none',
+  padding: 2,
+  marginBottom: -3,
+  marginLeft: 6,
+  cursor: 'pointer',
   color: '#fff',
 });
 
@@ -17,11 +31,18 @@ const TagList = ({ tags, movieId }) => {
   }
 
   return (
-    <ul css={{ listStyle: 'none', paddingLeft: 0, display: 'flex' }}>
+    <ul
+      css={{
+        listStyle: 'none',
+        paddingLeft: 0,
+        display: 'flex',
+        alignContent: 'center',
+      }}
+    >
       {tags.map((t, idx) => (
         <li key={idx} css={tagItem}>
           {t}
-          <button onClick={() => removeTag(movieId, t)}>
+          <button onClick={() => removeTag(movieId, t)} css={removeButton}>
             <RemoveIcon />
           </button>
         </li>
