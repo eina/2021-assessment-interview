@@ -13,7 +13,7 @@ const inputField = css({
 });
 
 const addButton = css({
-  width: '30%',
+  width: 170,
   padding: '1em',
   border: 'none',
   borderRadius: 5,
@@ -23,6 +23,9 @@ const addButton = css({
   cursor: 'pointer',
   '&:hover, &:focus, &:active': {
     backgroundColor: 'rgba(44, 103, 101, 0.9)',
+  },
+  '&:disabled': {
+    backgroundColor: '#888',
   },
 });
 

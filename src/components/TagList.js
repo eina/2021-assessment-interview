@@ -6,8 +6,8 @@ import { removeTag } from '../db';
 import { ReactComponent as RemoveIcon } from '../assets/x-icon.svg';
 
 const tagItem = css({
+  minWidth: 50,
   display: 'flex',
-  // flex: '0 0 100%',
   margin: '0 4px',
   padding: '4px 12px 4px 10px',
   borderRadius: 25,
@@ -20,8 +20,8 @@ const removeButton = css({
   border: 'none',
   background: 'none',
   padding: 2,
-  marginBottom: -3,
-  marginLeft: 6,
+  marginBottom: -5,
+  marginLeft: 4,
   cursor: 'pointer',
   color: '#fff',
 });

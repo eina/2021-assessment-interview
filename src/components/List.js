@@ -18,25 +18,14 @@ const listItem = css({
   display: 'grid',
   alignItems: 'center',
   gap: 10,
-  '@media (min-width: 807px)': {
-    gridTemplateColumns: 'repeat(3, 1fr)',
+  '@media (min-width: 1060px)': {
+    gridTemplateColumns: '1fr 2fr 1fr',
   },
 });
 
 const tagGrid = css({
-  '@media (min-width: 807px) and (max-width: 1060px)': {
-    gridColumn: 1,
-    gridRow: 2,
-  },
   '@media (min-width: 1060px)': {
     justifySelf: 'end',
-  },
-});
-
-const fieldGrid = css({
-  '@media (min-width: 807px) and (max-width: 1060px)': {
-    gridColumn: 3,
-    gridRow: 2,
   },
 });
 
@@ -64,12 +53,7 @@ const List = ({ data = [] }) => {
               <TagList tags={item.tags} movieId={item.id} />
             </div>
 
-            <div css={fieldGrid}>
-              <AddTagField
-                movieId={item.id}
-                tagLimit={item.tags.length === 5}
-              />
-            </div>
+            <AddTagField movieId={item.id} tagLimit={item.tags.length === 5} />
           </li>
         );
       })}

@@ -21,7 +21,9 @@ const App = () => {
             'https://my.api.mockaroo.com/movies.json?key=bf3c1c60',
           );
 
-          await db.movies.bulkPut(data.map((d) => ({ ...d, tags: [] })));
+          await db.movies.bulkPut(
+            data.map((d, idx) => ({ ...d, tags: idx === 0 ? ['Tag!'] : [] })),
+          );
         }
       } catch (error) {
         console.log(error);
